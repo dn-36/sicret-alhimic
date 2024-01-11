@@ -18,10 +18,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.plcoding.composeswipeablepages.MainActivity
 import com.plcoding.composeswipeablepages.R
 import com.plcoding.composeswipeablepages.levels_feature.viewmodel.usecase.levelImage
-import com.plcoding.composeswipeablepages.common.navigate.Screen
+import com.plcoding.composeswipeablepages.levels_feature.viewmodel.event.IntentLevels
 import com.plcoding.composeswipeablepages.levels_feature.viewmodel.viewmodel.ViewModelLevels
 
 @Preview
@@ -31,6 +30,8 @@ fun ShowLevels() {
 }
 
 object LevelsScreen {
+
+    val vm = ViewModelLevels()
     @Composable
     fun Content() {
         Image(
@@ -41,13 +42,14 @@ object LevelsScreen {
             modifier = Modifier
                 .fillMaxWidth(0.2f)
                 .padding(top = 40.dp, start = 20.dp)
-                .clickable { MainActivity.navController.navigate(Screen.Menu.route) })
+                .clickable { vm.processIntent(IntentLevels.goMenu) })
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 80.dp)
         ) {
-            itemsIndexed(levelImage.chunked(3)) { _, rowImages ->
+            itemsIndexed(levelImage.chunked(3)) { index, rowImages ->
+                Log.d("test_12",index.toString())
                 Row(
                     modifier = Modifier.fillMaxSize(),
                     horizontalArrangement = Arrangement.SpaceAround,
@@ -60,8 +62,8 @@ object LevelsScreen {
                                 .size(120.dp)
                                 .padding(vertical = 10.dp)
                                 .clickable {
+                                 vm.processIntent(IntentLevels.ChoiceLevel(image.index))
 
-                                    MainActivity.navController.navigate(Screen.Game.route)
                                 }
                         )
                     }

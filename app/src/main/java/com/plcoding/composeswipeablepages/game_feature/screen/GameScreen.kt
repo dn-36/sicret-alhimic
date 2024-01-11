@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,8 +25,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plcoding.composeswipeablepages.MainActivity
 import com.plcoding.composeswipeablepages.R
+import com.plcoding.composeswipeablepages.common.ChangeDateApp
+import com.plcoding.composeswipeablepages.common.SizeField
+import com.plcoding.composeswipeablepages.common.listLevels
 import com.plcoding.composeswipeablepages.common.navigate.Screen
-import com.plcoding.composeswipeablepages.levels_feature.viewmodel.viewmodel.ViewModelLevels
+import com.plcoding.composeswipeablepages.game_feature.components.CellField2x2
+import com.plcoding.composeswipeablepages.game_feature.components.CellField3x3
+import com.plcoding.composeswipeablepages.game_feature.components.CellField4x4
+import com.plcoding.composeswipeablepages.game_feature.components.CellField5x5
+import com.plcoding.composeswipeablepages.game_feature.viewmodel.GameIntent
+import com.plcoding.composeswipeablepages.game_feature.viewmodel.ViewModelGame
 
 @Preview
 @Composable
@@ -36,8 +42,13 @@ fun ShowGame(){
     GameScreen.Content()
 }
 object GameScreen{
+
+    val vm = ViewModelGame()
 @Composable
 fun Content(){
+
+vm.processIntent(GameIntent.setField)
+
 Image(painter = painterResource(id = R.drawable.game_backgraund), contentDescription =null,
 modifier = Modifier.fillMaxSize(), contentScale = ContentScale.FillBounds)
     Box(modifier = Modifier.fillMaxSize()) {
@@ -71,10 +82,10 @@ modifier = Modifier.fillMaxSize(), contentScale = ContentScale.FillBounds)
             Text(text = "3", fontSize = 30.sp, color = Color.White, fontWeight = FontWeight.Bold)
             Text(text = "23", fontSize = 30.sp, color = Color.White, fontWeight = FontWeight.Bold)
         }
-        Text(text = "20:55", fontSize = 45.sp, color = Color.White,
+       /* Text(text = "20:55", fontSize = 45.sp, color = Color.White,
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 90.dp))
+                .padding(top = 90.dp))*/
         Column(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(0.25f)
@@ -89,32 +100,18 @@ modifier = Modifier.fillMaxSize(), contentScale = ContentScale.FillBounds)
         }
         Box(modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .align(Alignment.Center),
             contentAlignment = Alignment.Center) {
-            Column(
-                modifier = Modifier.padding(bottom = 70.dp),
-                verticalArrangement = Arrangement.SpaceAround
-            ) {
-                for (i in 1 ..3 ){
-                    Row(horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        for (i in 1..3) {
-                            Card(
-                                modifier = Modifier.padding(4.dp),
-                                RoundedCornerShape(0f)
-                            ) {
-                                Image(painter = painterResource(id = R.drawable.card_defaults), contentDescription = null,
-                                modifier = Modifier
-                                    .height(140.dp)
-                                    .width(110.dp),
-                                contentScale = ContentScale.FillBounds)
-                            }
-                        }
-
-                    }
-                }}
+           when(ViewModelGame.gameState.fieldSize) {
+             SizeField.Size2x2 ->     CellField2x2(ViewModelGame.gameState.listCells)
+                SizeField.Size3x3 ->     CellField3x3()
+                SizeField.Size4x4 ->     CellField4x4()
+                SizeField.Size5x5 ->     CellField5x5()
 
             }
+
+        }
         }
     }
 
