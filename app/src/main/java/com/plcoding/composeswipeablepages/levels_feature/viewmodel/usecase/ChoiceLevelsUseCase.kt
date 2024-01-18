@@ -7,6 +7,9 @@ import com.plcoding.composeswipeablepages.common.navigate.Screen
 
 object ChoiceLevelsUseCase {
     fun excute(index:Int){
+
+        ChangeDateApp.stateSetField = true
+
         ChangeDateApp.clickedIndexLevel=index
         if(index in  0..3) {
             ChangeDateApp.sizeFieldNow = SizeField.Size2x2

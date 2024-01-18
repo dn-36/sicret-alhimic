@@ -3,6 +3,7 @@ package com.plcoding.composeswipeablepages.menu_feature.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,11 +32,26 @@ fun Content(){
     Image(painter = painterResource(id = R.drawable.menu_backgraund), contentDescription =null,
         modifier = Modifier.fillMaxSize(), contentScale = ContentScale.FillBounds)
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Column() {
         Image(painter = painterResource(id = R.drawable.levels_button), contentDescription =null,
-        modifier = Modifier.padding(bottom = 250.dp).fillMaxWidth(0.7f).fillMaxHeight(0.15f)
-            .clickable { vmMenu.processIntent(IntentMenu.MenuGame)})
+        modifier = Modifier
+            .fillMaxWidth(0.7f)
+            .fillMaxHeight(0.13f)
+            .clickable { vmMenu.processIntent(IntentMenu.MenuGame) })
         Image(painter = painterResource(id = R.drawable.shop_button), contentDescription =null,
-        modifier = Modifier.fillMaxWidth(0.7f).fillMaxHeight(0.15f)
-            .clickable { vmMenu.processIntent(IntentMenu.MenuShop)})
-    }
+        modifier = Modifier
+            .fillMaxWidth(0.7f)
+            .fillMaxHeight(0.15f)
+            .clickable { vmMenu.processIntent(IntentMenu.MenuShop) })
+        Image(painter = painterResource(id = R.drawable.button_score), contentDescription =null,
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.15f)
+                .clickable { vmMenu.processIntent(IntentMenu.MenuShop) })
+        Image(painter = painterResource(id = R.drawable.button_start), contentDescription =null,
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.15f)
+                .clickable { vmMenu.processIntent(IntentMenu.MenuShop) })
+    }}
 }}

@@ -19,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.plcoding.composeswipeablepages.R
-import com.plcoding.composeswipeablepages.levels_feature.viewmodel.usecase.levelImage
+import com.plcoding.composeswipeablepages.common.levelImage
 import com.plcoding.composeswipeablepages.levels_feature.viewmodel.event.IntentLevels
 import com.plcoding.composeswipeablepages.levels_feature.viewmodel.viewmodel.ViewModelLevels
 
@@ -42,7 +42,7 @@ object LevelsScreen {
             modifier = Modifier
                 .fillMaxWidth(0.2f)
                 .padding(top = 40.dp, start = 20.dp)
-                .clickable { vm.processIntent(IntentLevels.goMenu) })
+                .clickable { vm.processIntent(IntentLevels.goBack) })
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
